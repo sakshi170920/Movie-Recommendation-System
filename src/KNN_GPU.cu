@@ -61,12 +61,12 @@ void cuda_euclidean_kernel(const unsigned int *gpu_movie_data, const int n_movie
                 dist += pow(x_ik - x_jk, 2);
             }
 
-            gpu_movie_distances[n_movies * i + j] = dist; // pow(dist, 0.5);
+            gpu_movie_distances[n_movies * i + j] = dist; 
 
         }
 
-        // advance thread index
-        thread_index += blockDim.x * gridDim.x;
+        // advance thread index "grid stride loop"
+        thread_index += blockDim.x * gridDim.x; // total number of threads in the grid
     }
 
 }

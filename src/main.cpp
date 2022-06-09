@@ -103,14 +103,11 @@ void euclidean_movie_lens(int gpu, int k_val, bool verbose)
     t = clock();
 
     // MovieLens Dataset defaults
-    int n_movies = 27278;
-    int n_users = 138493;
+    int n_movies = 1682;
+    int n_users = 943;
 
     std::string dir_name = "ml-100k/";
     std::string dataset_size = "100 thousand";
-    n_movies = 1682;
-    n_users = 943;
-    
 
     std::vector<std::string> genres = {
         "Action", "Adventure", "Animation", "Children's",
@@ -133,9 +130,12 @@ void euclidean_movie_lens(int gpu, int k_val, bool verbose)
     std::vector<std::unordered_map<int, int>> user_ratings;
 
     LoadRatings(rating_name, n_movies, n_users, movie_ratings, user_ratings);
+
     if (verbose)
-    print_ratings(n_movies, movie_ratings);
-    print_ratings(n_users, user_ratings);
+    {
+        print_ratings(n_movies, movie_ratings);
+        print_ratings(n_users, user_ratings);
+    }
 
     if (verbose)
         print_array("MovieLens Euclidean Movies", &movie_data, 1, 100);
@@ -151,6 +151,9 @@ void euclidean_movie_lens(int gpu, int k_val, bool verbose)
         float * movie_distances;
         if (gpu == 1) {
             movie_distances = new float [n_movies * n_movies];
+            // “Maximum number of threads per block” is equal to 1024  
+            // maximum block sizes are listed as “Maximum x-dimension of a grid of thread blocks” = 2^31-1
+            // “Maximum y-, or z-dimension of a grid of thread blocks” = 65635.
             cuda_call_euclidean_kernel(65535, 1024, movie_data, n_movies,
                                        movie_size, movie_distances);
         }
