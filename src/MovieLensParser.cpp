@@ -86,17 +86,12 @@ void LoadRatings(std::string ratings_fname, const int &n_movies, const int &n_us
 
 
 void LoadGenres100k(std::string movie_fname, int &n_movies,
-    int &movie_size, unsigned int **movie_data,
-    bool movie = true, std::unordered_map<std::string, int> occupations = {})
+    int &movie_size, unsigned int **movie_data)
 {
     // movie_fname      :
     // n_movies (1682)  :
     // movie_size (20)  :
     // movie_data       :
-    // movie (optional) :
-    // occuptions (opt) :
-
-    int n_occupations = occupations.size();
 
     //storing 2d movie data in a 1d array row-wise
     *movie_data = new unsigned int[n_movies * movie_size];
