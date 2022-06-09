@@ -193,59 +193,8 @@ void euclidean_movie_lens(int gpu, int k_val, bool verbose)
         delete[] knn_predictions;
     }
     // Test to compare the GPU results against the CPU results
-    else {
-        // float * cpu_distances;
-        // float * gpu_distances;
-
-        // // GPU metric computation
-        // gpu_distances = new float [n_movies * n_movies];
-        // cuda_call_euclidean_kernel(65535, 1024, movie_data, n_movies,
-        //                            movie_size, gpu_distances);
-        // t = clock() - t;
-        // printf("Computing GPU Distances for size %s took %f seconds.\n",
-        //  dataset_size.c_str(), ((float)t)/CLOCKS_PER_SEC);
-
-        // // CPU metric computation
-        // euclidean_distances(&movie_data, n_movies, movie_size, &cpu_distances);
-        // t = clock() - t;
-        // printf("Computing CPU Distances for size %s took %f seconds.\n",
-        //     dataset_size.c_str(), ((float)t)/CLOCKS_PER_SEC);
-
-        // // Make sure the distances are the same
-        // compare_arrays(cpu_distances, gpu_distances, n_movies * n_movies);
-        // t = clock() - t;
-        // printf("Checking CPU and GPU distances are the same for size %s took %f seconds.\n",
-        //     dataset_size.c_str(), ((float)t)/CLOCKS_PER_SEC);
-
-        // // Find the k-nearest neighbors
-        // float * cpu_knn_predictions;
-        // float * gpu_knn_predictions;
-        
-        // // GPU knn prediction
-        // int pred_users = 900;
-        // int pred_movies = 1500;
-        // gpu_knn_predictions = new float[pred_users * pred_movies];
-        // cuda_call_prediction_kernel(32, 32, user_ratings, gpu_distances, 
-        //                             k_val, n_movies, n_users, gpu_knn_predictions, pred_movies, pred_users);
-        // t = clock() - t;
-        // printf("Computing GPU predictions for size %s took %f seconds.\n",
-        //     dataset_size.c_str(), ((float)t)/CLOCKS_PER_SEC);
-        
-        // // CPU knn prediction
-        // knn(user_ratings, &cpu_distances, k_val, n_movies, n_users, &cpu_knn_predictions);
-        // t = clock() - t;
-        // printf("Computing CPU predictions for size %s took %f seconds.\n",
-        //     dataset_size.c_str(), ((float)t)/CLOCKS_PER_SEC);
-        
-        // // Print randomly selected predicitons to compare cpu and gpu output
-        // printf("Comparing CPU and GPU predictions\n");
-        // print_random_entries(cpu_knn_predictions, gpu_knn_predictions, 100, pred_users * pred_movies);
-
-        // delete[] cpu_distances;
-        // delete[] gpu_distances;
-        // delete[] cpu_knn_predictions;
-        // delete[] gpu_knn_predictions;
-    }
+    // else {
+    // }
 
     delete[] movie_data;
 }

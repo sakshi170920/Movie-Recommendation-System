@@ -98,6 +98,7 @@ void LoadGenres100k(std::string movie_fname, int &n_movies,
 
     int n_occupations = occupations.size();
 
+    //storing 2d movie data in a 1d array row-wise
     *movie_data = new unsigned int[n_movies * movie_size];
     std::ifstream inputFile(movie_fname);
 
@@ -115,45 +116,6 @@ void LoadGenres100k(std::string movie_fname, int &n_movies,
             genre_count = 0;
             while (std::getline(iss, i, '|'))
             {
-                // If loading user data, then check if string is an occupation
-                if (!movie)
-                {
-                    // Convert male female to two different attributes
-                    if (i == "M" || i == "F")
-                    {
-                        if (i == "M") {
-                            (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 1;
-                            genre_count++;
-                            (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 0;
-                            genre_count++;
-                        } else {
-                            (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 0;
-                            genre_count++;
-                            (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 1;
-                            genre_count++;
-                        }
-                    }
-
-                    // One-hot encoding the occupations like any other movie category
-                    if (occupations.find(i) != occupations.end())
-                    {
-                        // Set this occupation category to
-                        int occ_ind = occupations[i];
-
-                        // Turn all other occupations to 0 except for this
-                        for (int j = 0; j < n_occupations; j++)
-                        {
-                            if (j != occ_ind)
-                            {
-                                (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 0;
-                            } else {
-                                (*movie_data)[(movie_count * movie_size) + genre_count - 1] = 1;
-                            }
-                            genre_count++;
-                        }
-                    }
-                }
-
                 if (is_number(i))
                 {
                     // Update the entry for the given category
@@ -176,17 +138,7 @@ void LoadGenres(std::string dir_name, int &n_movies,
 }
 
 // Function to load data into movie and user dataset pointers
-// alongside number of categories, e.t.c
 // Make sure these things are int pointers
 
 // Movie: movie_id, and then 19 ints of either 0 or 1
 // corresponding to the genres that movies are a part of
-// pointer array of 20 ints
-
-// User: user_id, age, gender, occupation (turn into int), zip code (roughly geographical)
-// another linearized pointer array of ints??
-
-// Store 2d matrix of distances between movies and users in shared memory and update
-// but won't we get bank conflicts then???
-// maybe not if we don't do a dynamic programming approach
-// but then we still have a lot of repeated computation
