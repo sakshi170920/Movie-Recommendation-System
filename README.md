@@ -24,5 +24,4 @@ Step-6: Our model is ready
 6. Populate user_ranges containing ranges of indices (start, end) of movies rated by each user.    
 7. Create knn_predictions[pred_users * pred_movies]  
 8. For thread with user u and movie m , create topk : all movies associated with u sorted(selection sort) in decreasing order of their eucledian distance  from m.   
-9. find top k, using selection sort.  
-10. computed weighted average of all topk movies to predict rating of give movie,user pair.  
+9. Computed weighted average of all topk movies to predict rating of give movie,user pair.  
