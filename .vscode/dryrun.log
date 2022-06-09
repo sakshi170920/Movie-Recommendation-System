@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/sakshi-ubuntu/Documents/knn_gpu'
+g++ -g -Wall -D_REENTRANT -std=c++0x -pthread -c -o obj/main.cpp.o -I/usr/local/cuda-11.7/include src/main.cpp
+g++ -g -Wall -D_REENTRANT -std=c++0x -pthread -c -o obj/KNN.cpp.o -I/usr/local/cuda-11.7/include src/KNN.cpp
+g++ -g -Wall -D_REENTRANT -std=c++0x -pthread -c -o obj/MovieLensParser.cpp.o -I/usr/local/cuda-11.7/include src/MovieLensParser.cpp
+/usr/local/cuda-11.7/bin/nvcc -m64 -g -dc -Wno-deprecated-gpu-targets --std=c++11 --expt-relaxed-constexpr -gencode arch=compute_50,code=sm_50 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_61,code=compute_61 -c -o obj/KNN_GPU.cu.o  src/KNN_GPU.cu
+/usr/local/cuda-11.7/bin/nvcc -dlink -Wno-deprecated-gpu-targets -gencode arch=compute_50,code=sm_50 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_61,code=compute_61 -o obj/cuda.o  obj/KNN_GPU.cu.o
+g++ -g -Wall -D_REENTRANT -std=c++0x -pthread -o knn -I/usr/local/cuda-11.7/include obj/main.cpp.o obj/KNN.cpp.o obj/MovieLensParser.cpp.o obj/cuda.o obj/KNN_GPU.cu.o -L/usr/local/cuda-11.7/lib64 -lcudart -lcufft -lsndfile
+make: Leaving directory '/home/sakshi-ubuntu/Documents/knn_gpu'
+ 
