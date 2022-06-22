@@ -151,9 +151,7 @@ void euclidean_movie_lens(int gpu, int k_val, bool verbose)
         float * movie_distances;
         if (gpu == 1) {
             movie_distances = new float [n_movies * n_movies];
-            // “Maximum number of threads per block” is equal to 1024  
-            // maximum block sizes are listed as “Maximum x-dimension of a grid of thread blocks” = 2^31-1
-            // “Maximum y-, or z-dimension of a grid of thread blocks” = 65635.
+
             cuda_call_euclidean_kernel(65535, 1024, movie_data, n_movies,
                                        movie_size, movie_distances);
         }
