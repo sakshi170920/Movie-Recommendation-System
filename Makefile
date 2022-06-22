@@ -1,8 +1,3 @@
-#
-# CS 179 Final Project
-# Bhairav Chidambaram and Connor Soohoo
-#
-
 # Directories
 OBJDIR = obj
 SRCDIR = src
