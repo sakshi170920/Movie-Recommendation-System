@@ -25,3 +25,5 @@ Step-6: Our model is ready
 7. Create knn_predictions[pred_users * pred_movies]  
 8. For thread with user u and movie m , create topk : all movies associated with u sorted(selection sort) in decreasing order of their eucledian distance  from m.   
 9. Computed weighted average of all topk movies to predict rating of give movie,user pair.  
+
+For a more detailed explanation refer : https://docs.google.com/document/d/1jQ3OVbBUyj-LM5-O5-lp4Nt8Fe_2u9iyhORpKxSghyc/edit?usp=sharing
